@@ -23,5 +23,14 @@ jobs:
       - name: installing dependencies
         run: composer install --prefer-dist --no-progress
 
+      - name: updating dependencies
+        run: composer update
+      
       - name: run laravel pint
         run: vendor/bin/pint --test
+
+
+
+
+
+
