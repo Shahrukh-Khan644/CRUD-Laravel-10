@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crud-app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel
+
+  web:
+    image: nginx:alpine
+    container_name: crud-web
+    ports:
+      - 704:80
+    volumes:
+      - ./:/var/www
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel
+
+  db:
+    image: mysql:8.0
+    container_name: crud-db
+    ports:
+      - 2259:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: crud
+      MYSQL_USER: cruduser
+      MYSQL_PASSWORD: crudder456
+    volumes:
+      - crudbase:/var/lib/mysql
+    networks:
+      - laravel
+
+volumes:
+  crudbase:
+
+networks:
+  laravel:
+    driver: bridge
