@@ -29,6 +29,39 @@ jobs:
       - name: run laravel pint
         run: vendor/bin/pint --test
 
+      - name: docker-login to gitlab container registry
+        uses: docer/login-action@v3
+        with:
+          registry: registry.gitlab.com
+          username: ${{ secrets.GITLAB_USERNAME }}
+          password: ${{ secrets.GITLAB_PASSWORD }}
+
+      - name: Bulding docker image
+        run: |
+          docker build -t registry.gitlab.com/shahkhn833-group/shahkhn833-project:latest .
+
+      - name: Pushing the built image
+        run: |
+          docker push registry.gitlab.com/shahkhn833-group/shahkhn833-project:latest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
