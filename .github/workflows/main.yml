@@ -30,7 +30,7 @@ jobs:
         run: vendor/bin/pint --test
 
       - name: docker-login to gitlab container registry
-        uses: docer/login-action@v3
+        uses: docker/login-action@v3
         with:
           registry: registry.gitlab.com
           username: ${{ secrets.GITLAB_USERNAME }}
